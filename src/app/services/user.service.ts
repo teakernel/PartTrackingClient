@@ -1,11 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 
-const baseURL = 'http://localhost:8080/pts/users';
+const baseURL = 'http://localhost:8080/api/users/';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -27,22 +31,32 @@ export class UserService {
     return this.userSubject.value;
   }
 
-  logout() {
-    localStorage.removeItem('user');
-    this.userSubject.next(null);
-    this.router.navigate(['/login']);
+  logout(): Observable<any> {
+    return this.http.post(baseURL + 'signout', { }, httpOptions);
   }
 
-  login(email: string, password: string) {
-    return this.http.post(`${baseURL}/login`, { email, password });
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(
+      baseURL + 'login',
+      {
+        username,
+        password,
+      },
+      httpOptions
+    );
   }
 
   getAll() {
-    return this.http.get<User[]>(baseURL);
+    return this.http.get<User[]>(baseURL + 'list');
   }
 
-  register(data: any): Observable<any> {
-    return this.http.post(baseURL, data);
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(baseURL + 'register', {
+      username,
+      email,
+      password,
+    },
+    httpOptions);
   }
 
   delete(id: string) {

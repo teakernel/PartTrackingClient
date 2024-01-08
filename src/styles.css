@@ -1,2 +1,2 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
-/* @import "~element-angular/theme/index.css"; */
+@import "../node_modules/element-angular/theme/index.css";

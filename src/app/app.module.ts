@@ -3,6 +3,7 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppRouteModule } from "./app-routing.module";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistComponent } from "./components/regist/regist.component";
@@ -15,7 +16,7 @@ import { UserListComponent } from "./components/user-list/user-list.component";
         LoginComponent,
         RegistComponent,
         HomeComponent,
-        UserListComponent,
+        UserListComponent,        
     ],
     imports:[
         AppRouteModule,

@@ -1,6 +1,6 @@
 export class User {
     userId?:any;
-    name?:String;
+    username?:String;
     password?:String;
     expDate?:Date;
     email?:String;
